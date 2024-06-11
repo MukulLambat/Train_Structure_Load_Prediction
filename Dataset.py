@@ -74,4 +74,18 @@ Combined_df = pd.concat(Dataset, ignore_index=True)
 
 # Save the combined DataFrame to a new CSV file
 Combined_df.to_csv('/Users/mukul/Desktop/DLR_Internship/Data/Dataset.csv', index=False)
-    
+
+#%% Time step columns is moved to first the postion
+Dataset = pd.read_csv('/Users/mukul/Desktop/DLR_Internship/Data/Dataset.csv')
+
+# Extract the 9th column
+column_9 = Dataset.iloc[:, 9]  
+
+# Delete the 9 th column from its original position
+df = Dataset.drop(Dataset.columns[9], axis=1)
+
+# Insert the extracted column at the first position
+df.insert(0, 'Time Step', column_9)
+
+# Write the modified DataFrame back to a CSV file
+df.to_csv('/Users/mukul/Desktop/DLR_Internship/Data/Dataset_Modified.csv', index=False)    
