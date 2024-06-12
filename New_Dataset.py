@@ -23,19 +23,19 @@ Acceleration_Files = glob.glob(os.path.join(Raw_Data_path, 'Load_*_*Xa.csv'))
 Sorted_Acceleration_Files = sorted(Acceleration_Files, key=extract_number)
 
 for file in Sorted_Acceleration_Files:
-    #print(file)
+
     # Extract the file name from the path
     X_Acceleration_Name = os.path.basename(file)
-    #print(Each_Acceleration_File_Name)
+
     Split_File_Name = X_Acceleration_Name.split('_')
-    #print(Split_File_Name)
-    # Get the corresponding y and z direction files
+
+    # Read the x, y and z direction files and Force applied
     X_Acceleration = pd.read_csv(os.path.join(Raw_Data_path, X_Acceleration_Name))
     Y_Acceleration = pd.read_csv(os.path.join(Raw_Data_path,f"{Split_File_Name[0]}_{Split_File_Name[1]}_Ya.csv"))
     Z_Acceleration = pd.read_csv(os.path.join(Raw_Data_path,(f"{Split_File_Name[0]}_{Split_File_Name[1]}_Za.csv")))
     Force_Applied = pd.read_csv(os.path.join(Raw_Data_path,f"{Split_File_Name[0]}_{Split_File_Name[1]}_curve.csv"))
-    #print("Corresponding files",Y_File,Z_File,Force_File)
     
+    # Empty Dataframe for Separate Dataset
     Dataset = pd.DataFrame()
     
     # Iterate over each column index
