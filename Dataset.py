@@ -23,6 +23,7 @@ Each_Combined_Load_And_Forces = '/Users/mukul/Desktop/DLR_Internship/Data/Each_C
 
 Acceleration_Data = glob.glob(os.path.join(Acceleration_Data_Path, 'Load_*_*a.csv'))
 
+
 # Iterate through each Load (acceleration) file
 for Each_Acceleration_File in Acceleration_Data:
     
