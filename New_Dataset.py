@@ -1,10 +1,12 @@
+''' This Scripts combines the simulation results obtained and create the dataset.'''
+
 #%% Import Libraries
 import pandas as pd
 import numpy as np
 import os
 import glob
 import re
-#%% 
+#%%
 Raw_Data_path = '/Users/mukul/Desktop/DLR_Internship/Data/Raw_Data'
 
 # Define a custom sorting key function
@@ -47,16 +49,18 @@ for file in Sorted_Acceleration_Files:
         
         # Concatenate the columns horizontally
         Temporary_Dataset = pd.concat([X_Acceleration_Column, Y_Acceleration_Column, Z_Acceleration_Column], axis=1)
-    
-        # Rename the columns to avoid duplicates
-        Temporary_Dataset.columns = [f'X_Acc_{i}', f'Y_Acc_{i}', f'Z_Acc_{i}']
-    
+        
+        # Rename the columns to avoid duplicates, using the original column names
+        original_colnames = [X_Acceleration.columns[i], Y_Acceleration.columns[i], Z_Acceleration.columns[i]]        
+        Temporary_Dataset.columns = [f'X_Acc_{i}_{original_colnames[0]}', f'Y_Acc_{i}_{original_colnames[1]}', f'Z_Acc_{i}{original_colnames[2]}']
+        
         # Concatenate the temporary DataFrame with the Dataset DataFrame
         Dataset = pd.concat([Dataset, Temporary_Dataset], axis=1)
     
     # Extract the columns from Force Applied
     Time_Step = Force_Applied.iloc[:, 0]
     Applied_Force_Values = Force_Applied.iloc[:, 1]
+    
     
     # Insert Time_Step at the first position
     Dataset.insert(0, 'Time_Step', Time_Step)
@@ -65,4 +69,6 @@ for file in Sorted_Acceleration_Files:
     Dataset['Applied_Force'] = Applied_Force_Values    
     
     # Save the Dataset DataFrame to a CSV file
-    Dataset.to_csv(f'/Users/mukul/Desktop/DLR_Internship/Data/New/Combined_{Split_File_Name[0]}_{Split_File_Name[1]}_Force.csv', index=False)
+    Dataset.to_csv(f'/Users/mukul/Desktop/DLR_Internship/Data/Combined_Load_&_Force/Combined_{Split_File_Name[0]}_{Split_File_Name[1]}_Force.csv', index=False)
+
+# %% Now Concatnate each individual CSV to create the whole Dataset
