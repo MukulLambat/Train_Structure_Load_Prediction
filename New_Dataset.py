@@ -51,8 +51,8 @@ for file in Sorted_Acceleration_Files:
         Temporary_Dataset = pd.concat([X_Acceleration_Column, Y_Acceleration_Column, Z_Acceleration_Column], axis=1)
         
         # Rename the columns to avoid duplicates, using the original column names
-        original_colnames = [X_Acceleration.columns[i], Y_Acceleration.columns[i], Z_Acceleration.columns[i]]        
-        Temporary_Dataset.columns = [f'X_Acc_{i}_{original_colnames[0]}', f'Y_Acc_{i}_{original_colnames[1]}', f'Z_Acc_{i}{original_colnames[2]}']
+        Original_Column_Names = [X_Acceleration.columns[i], Y_Acceleration.columns[i], Z_Acceleration.columns[i]]        
+        Temporary_Dataset.columns = [f'X_Acc_{Original_Column_Names[0]}', f'Y_Acc_{Original_Column_Names[1]}', f'Z_Acc_{Original_Column_Names[2]}']
         
         # Concatenate the temporary DataFrame with the Dataset DataFrame
         Dataset = pd.concat([Dataset, Temporary_Dataset], axis=1)
