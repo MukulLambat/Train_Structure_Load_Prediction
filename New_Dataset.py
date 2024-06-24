@@ -6,9 +6,10 @@ import numpy as np
 import os
 import glob
 import re
+import time
 #%%
 Raw_Data_path = '/Users/mukul/Desktop/DLR_Internship/Data/Raw_Data'
- 
+Start_Time = time.time() 
 # Define a custom sorting key function
 def extract_number(filename):
     # Use regular expression to extract the number from the filename
@@ -93,3 +94,7 @@ Concatenated_Simulation_Result = pd.concat(Simulation_Result, axis=0, ignore_ind
 # Save the concatenated DataFrame to a new CSV file
 
 Concatenated_Simulation_Result.to_csv('/Users/mukul/Desktop/DLR_Internship/Data/Combine_Data.csv', index=False)
+
+End_Time = time.time()
+#%% 
+print(f"Dataset Created and first script is completed in {End_Time-Start_Time} sec.")
