@@ -1,13 +1,12 @@
 #%% Import Required Python Files
 import Data_PreProcessing as DP
 
-
 #%% Import the requied libraries
 import pandas as pd 
 import numpy as np  
 import sktime
 import sklearn
-from lightgbm import LGBMRegressor
+from sklearn import linear_model
 import matplotlib as plt
 import time
 
@@ -15,14 +14,8 @@ Start_Time = time.time()
 print(f"Model training started.")
 #%% Get the model to predict the focre applied
 
-# Initialize the regression model
-Model = LGBMRegressor(boosting_type='gbdt',
-                      num_leaves = 60,
-                      n_estimators = 500,
-                      learning_rate = 0.01, 
-                      class_weight = 'balanced', 
-                      random_state = 112, 
-                      n_jobs = -1)
+# Initialize the linear regression model
+Model = linear_model.LinearRegression()
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train_Transformed, DP.Y_Train)
@@ -35,8 +28,8 @@ Current_Time = time.time()
 
 print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make preditions.")
 
-# Imorting the required metrics from sklearn
 
+# Importing the required Metrics from Sklearn
 from sklearn.metrics import (mean_absolute_error, 
                             mean_squared_error, 
                             mean_squared_log_error, 
@@ -88,7 +81,7 @@ results = {
 }
 
 # Get model name
-model_name = 'LGBMRegressor_Model_Results'
+model_name = 'Linear_Regression_Model_Results'
 
 # File path where you want to save the results
 file_path = f'/Users/mukul/Desktop/DLR_Internship/Results/{model_name}.txt'
