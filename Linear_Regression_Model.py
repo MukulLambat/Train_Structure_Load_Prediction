@@ -11,6 +11,7 @@ import matplotlib as plt
 import time
 
 Start_Time = time.time()
+
 print(f"Model training started.")
 #%% Get the model to predict the focre applied
 
@@ -26,7 +27,7 @@ Y_Prediction = Model.predict(DP.X_Train_Transformed)
 
 Current_Time = time.time()
 
-print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make preditions.")
+print(f" Model training is done.\n It took {Current_Time-Start_Time} to train the model and make preditions.")
 
 
 # Importing the required Metrics from Sklearn

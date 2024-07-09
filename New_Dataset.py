@@ -8,8 +8,10 @@ import glob
 import re
 import time
 #%%
-Raw_Data_path = '/Users/mukul/Desktop/DLR_Internship/Data/Raw_Data'
+Raw_Data_path = '/Users/mukul/Desktop/DLR_Internship/Actual_Data'
+
 Start_Time = time.time() 
+
 # Define a custom sorting key function
 def extract_number(filename):
     # Use regular expression to extract the number from the filename
@@ -25,6 +27,12 @@ Acceleration_Files = glob.glob(os.path.join(Raw_Data_path, 'Load_*_*Xa.csv'))
 # Sort the files based on the number present in the filename
 Sorted_Acceleration_Files = sorted(Acceleration_Files, key=extract_number)
 
+"""
+Here in the loop below we are trying to create the Individual dataframe for
+each simulation result and after that we will concatenate all the 12 simulation 
+results to one final dataset.
+
+"""
 for file in Sorted_Acceleration_Files:
 
     # Extract the file name from the path
@@ -61,7 +69,6 @@ for file in Sorted_Acceleration_Files:
     # Extract the columns from Force Applied
     Time_Step = Force_Applied.iloc[:, 0]
     Applied_Force_Values = Force_Applied.iloc[:, 1]
-    
     
     # Insert Time_Step at the first position
     Dataset.insert(0, 'Time_Step', Time_Step)

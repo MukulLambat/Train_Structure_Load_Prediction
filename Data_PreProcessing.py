@@ -1,5 +1,5 @@
 #%% Import Requird python files
-import New_Dataset as ND
+import Actual_Data as AD
 
 #%% Import Required Libraries
 import pandas as pd 
@@ -12,11 +12,10 @@ from sklearn.preprocessing import MinMaxScaler
 import time
 from sklearn.preprocessing import StandardScaler
 
-
 Start_Time = time.time()
 
 # %%# Check for missing values
-Missing_Values = ND.Concatenated_Simulation_Result.isnull().sum().sum()
+Missing_Values = AD.Concatenated_Simulation_Result.isnull().sum().sum()
 # Print the count of missing values per column
 # print("\nTotal count of missing values:")
 # print(Missing_Values)
@@ -24,8 +23,8 @@ Missing_Values = ND.Concatenated_Simulation_Result.isnull().sum().sum()
 #print(Dataset.head(2))
 #%% Separate inputs (sensor data) and output (Force applied)
 
-X = ND.Concatenated_Simulation_Result.drop(columns=['Time_Step', 'Applied_Force']).values
-Y = ND.Concatenated_Simulation_Result['Applied_Force'].values
+X = AD.Concatenated_Simulation_Result.drop(columns=['Time_Step', 'Force_Applied']).values
+Y = AD.Concatenated_Simulation_Result['Force_Applied'].values
 
 #%% Split the Dataset using train test split function from sklearn
 
@@ -50,7 +49,6 @@ X_Test_Standardized = std.fit_transform(X_Test)
 
 #print("X_Train_Norm:",X_Train_Standardized[0:2,1:3])
 
-
 #%% Data Normalization 
 
 # fit scaler on training data
@@ -59,7 +57,7 @@ Normalizer_Model = MinMaxScaler().fit(X_Train_Standardized)
 # transform training data
 X_Train_Normalized = Normalizer_Model.transform(X_Train_Standardized)
 
-# transform testing database
+# transform testing data
 X_Test_Normalized = Normalizer_Model.transform(X_Test_Standardized)
 #print("X_Train_Norm:",X_Train_Normalized[0:2,1:3])
 # print("X_Test-Norm:",X_Test_Normalized[0:2,1:3])
@@ -92,4 +90,4 @@ X_Test_Transformed = Minirocket_Model.transform(X_Test_Reshaped)
 
 End_Time = time.time()
 
-print(f"Data Pre-Processing is done and Second script is completed in {End_Time-Start_Time} sec.")
+print(f"Data Pre-Processing is done and is completed in {End_Time-Start_Time} sec.")
