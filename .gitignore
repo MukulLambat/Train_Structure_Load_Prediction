@@ -1,0 +1,9 @@
+*.DS_Store
+Data/
+*.csv
+*.CSV
+*.xlsx
+*.XLSX
+check.py
+Bash_Script.sh
+Model.py
