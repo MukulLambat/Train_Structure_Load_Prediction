@@ -7,3 +7,5 @@ Data/
 check.py
 Bash_Script.sh
 Model.py
+test.py
+__pycache__/
