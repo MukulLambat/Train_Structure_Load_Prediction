@@ -1,0 +1,19 @@
+Dataset Created and first script is completed in 4.79853081703186 sec.
+Data Pre-Processing is done and Second script is completed in 3.615781307220459 sec.
+Model training started.
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 2.431238 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 113670
+[LightGBM] [Info] Number of data points in the train set: 57609, number of used features: 9850
+[LightGBM] [Info] Start training from score 2.662116
+Model training is done.
+ It took 161.4948616027832 to train the model and make preditions.
+Mean Absolute Error: 1.3106605163179068
+Mean Absolute Percentage Error: 410.94371425834277%
+Mean Squared Error: 3.482553134200922
+Root Mean Squared Error: 1.8661599969458467
+Mean Squared Logarithmic Error: 0.340243874176892
+R-squared: 0.42663542835742596
+Explained Variance Score: 0.4896079616908672
+Results saved to /work/ws-tmp/g059548-ML_Project/Results/LGBMRegressor_Model_Results.txt
+The process is completed and it took in total 161.5174422264099 sec.

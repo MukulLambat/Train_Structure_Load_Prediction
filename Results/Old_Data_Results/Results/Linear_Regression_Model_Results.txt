@@ -1,0 +1,8 @@
+Results for model: Linear_Regression_Model_Results
+========================================
+Mean Absolute Error: 1.102821716197773
+Mean Absolute Percentage Error: 288.3251847348706
+Mean Squared Error: 3.158206363077251
+Root Mean Squared Error: 1.7771343120533267
+R-squared: 0.4800356035514928
+Explained Variance Score: 0.48003561306090103

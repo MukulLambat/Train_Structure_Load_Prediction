@@ -1,0 +1,15 @@
+/home/g059548/.local/lib/python3.8/site-packages/sklearn/linear_model/_stochastic_gradient.py:1561: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
+  warnings.warn(
+Dataset Created and first script is completed in 4.833645820617676 sec.
+Data Pre-Processing is done and Second script is completed in 4.259233474731445 sec.
+Model training started.
+Model training is done.
+ It took 1265.3543059825897 to train the model and make preditions.
+Mean Absolute Error: 444739393.3183001
+Mean Absolute Percentage Error: 170795620955.76395%
+Mean Squared Error: 3.1899850798911955e+17
+Root Mean Squared Error: 564799529.0269988
+R-squared: -5.251964172249996e+16
+Explained Variance Score: -4.600577784552109e+16
+Results saved to /work/ws-tmp/g059548-ML_Project/Results/Stochastic_Gradient_Descent_Model_Results.txt
+The process is completed and it took in total 1265.416184425354 sec.

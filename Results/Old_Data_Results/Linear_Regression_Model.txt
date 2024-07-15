@@ -1,0 +1,13 @@
+Dataset Created and first script is completed in 6.097514629364014 sec.
+Data Pre-Processing is done and Second script is completed in 4.309654712677002 sec.
+Model training started.
+Model training is done.
+ It took 276.1385896205902 to train the model and make preditions.
+Mean Absolute Error: 1.102821716197773
+Mean Absolute Percentage Error: 288.3251847348706%
+Mean Squared Error: 3.158206363077251
+Root Mean Squared Error: 1.7771343120533267
+R-squared: 0.4800356035514928
+Explained Variance Score: 0.48003561306090103
+Results saved to /work/ws-tmp/g059548-ML_Project/Results/Linear_Regression_Model_Results.txt
+The process is completed and it took in total 276.19847416877747 sec.

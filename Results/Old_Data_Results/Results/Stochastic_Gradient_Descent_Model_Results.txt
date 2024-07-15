@@ -1,0 +1,8 @@
+Results for model: Stochastic_Gradient_Descent_Model_Results
+========================================
+Mean Absolute Error: 444739393.3183001
+Mean Absolute Percentage Error: 170795620955.76395
+Mean Squared Error: 3.1899850798911955e+17
+Root Mean Squared Error: 564799529.0269988
+R-squared: -5.251964172249996e+16
+Explained Variance Score: -4.600577784552109e+16
