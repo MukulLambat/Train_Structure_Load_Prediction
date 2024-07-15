@@ -1,50 +1,44 @@
-#%%Add the directory containing Data_PreProcessing.py to the system path
+#%% Add the directory containing Data_PreProcessing.py to the system path
 import sys
+import os
 sys.path.append('/Users/mukul/Desktop/DLR_Internship/Code/Process_Data')
 
 # Import Required Python Files
 import Data_PreProcessing as DP
 
-#%% Import the requied libraries
+#%% Import the required libraries
 import pandas as pd 
 import numpy as np  
 import sktime
 import sklearn
-import lightgbm 
-from lightgbm import LGBMRegressor
+from sklearn.svm import SVR
 import matplotlib as plt
 import time
 
 Start_Time = time.time()
 print(f"Model training started.")
-#%% Get the model to predict the focre applied
+#%% Get the model to predict the force applied
 
-# Initialize the regression model
-Model = LGBMRegressor(boosting_type='gbdt',
-                      num_leaves = 60,
-                      n_estimators = 500,
-                      learning_rate = 0.01, 
-                      class_weight = 'balanced', 
-                      random_state = 112, 
-                      n_jobs = -1)
+# Initialize the SVM regression model
+Model = SVR(kernel='rbf')
+
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train, DP.Y_Train)
 
-# Make predictions on the Train set
+# Make predictions on the train set
 
 Y_Train_Prediction = Model.predict(DP.X_Train)
 
-# Make predictions on the Test set
+# Make predictions on the test set
 
 Y_Test_Prediction = Model.predict(DP.X_Test)
 
 Current_Time = time.time()
 
-print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make preditions.")
+print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make predictions.")
 
-# Imorting the required metrics from sklearn
-
+# Importing the required evaluation metric from Sklearn
 from sklearn.metrics import (mean_absolute_error, 
                             mean_squared_error, 
                             mean_squared_log_error, 
@@ -96,7 +90,7 @@ results = {
 }
 
 # Get model name
-model_name = 'LGBMRegressor_Model_Results'
+model_name = 'Support_Vector_Machine'
 
 # File path where you want to save the results
 file_path = f'/Users/mukul/Desktop/DLR_Internship/Results/{model_name}.txt'

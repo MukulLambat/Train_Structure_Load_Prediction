@@ -1,7 +1,12 @@
-#%% Import Required Python Files
+#%% Add the directory containing Data_PreProcessing.py to the system path
+import sys
+import os
+sys.path.append('/Users/mukul/Desktop/DLR_Internship/Code/Process_Data')
+
+# Import Required Python Files
 import Data_PreProcessing as DP
 
-#%% Import the requied libraries
+#%% Import the required libraries
 import pandas as pd 
 import numpy as np  
 import sktime
@@ -12,23 +17,27 @@ import time
 
 Start_Time = time.time()
 print(f"Model training started.")
-#%% Get the model to predict the focre applied
+#%% Get the model to predict the force applied
 
 # Initialize the SVM regression model
-Model = SGDRegressor()
+Model = SGDRegressor(loss='squared_error')
 # Train the model on the transformed training data
 
-Model.fit(DP.X_Train_Transformed, DP.Y_Train)
+Model.fit(DP.X_Train, DP.Y_Train)
+
+# Make predictions on the train set
+
+Y_Train_Prediction = Model.predict(DP.X_Train)
 
 # Make predictions on the test set
 
-Y_Prediction = Model.predict(DP.X_Train_Transformed)
+Y_Test_Prediction = Model.predict(DP.X_Test)
 
 Current_Time = time.time()
 
-print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make preditions.")
+print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the model and make predictions.")
 
-
+#%%
 # Importing the required evaluation metric from Sklearn
 from sklearn.metrics import (mean_absolute_error, 
                             mean_squared_error, 
@@ -38,7 +47,7 @@ from sklearn.metrics import (mean_absolute_error,
 
 
 # Mean Absolute Error
-MAE = mean_absolute_error(DP.Y_Train, Y_Prediction)
+MAE = mean_absolute_error(DP.Y_Test, Y_Test_Prediction)
 print(f'Mean Absolute Error: {MAE}')
 
 # Mean Absolute Percentage Error
@@ -46,27 +55,27 @@ def mean_absolute_percentage_error(y_true, y_pred):
     y_true, y_pred = np.array(y_true), np.array(y_pred)
     return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
 
-MAPE = mean_absolute_percentage_error(DP.Y_Train, Y_Prediction)
+MAPE = mean_absolute_percentage_error(DP.Y_Test, Y_Test_Prediction)
 print(f'Mean Absolute Percentage Error: {MAPE}%')
 
 # Mean Squared Error
-MSE = mean_squared_error(DP.Y_Train, Y_Prediction)
+MSE = mean_squared_error(DP.Y_Test, Y_Test_Prediction)
 print(f'Mean Squared Error: {MSE}')
 
 # Root Mean Squared Error
-RMSE = mean_squared_error(DP.Y_Train, Y_Prediction, squared=False)
+RMSE = mean_squared_error(DP.Y_Test, Y_Test_Prediction, squared=False)
 print(f'Root Mean Squared Error: {RMSE}')
 
 # # Mean Squared Log Error
-# MLSE = mean_squared_log_error(DP.Y_Train, Y_Prediction)
+# MLSE = mean_squared_log_error(DP.Y_Test, Y_Test_Prediction)
 # print(f'Mean Squared Logarithmic Error: {MLSE}')
 
 # R-squared Error
-r2 = r2_score(DP.Y_Train, Y_Prediction)
+r2 = r2_score(DP.Y_Test, Y_Test_Prediction)
 print(f'R-squared: {r2}')
 
 # Explained Variance Score
-EVS = explained_variance_score(DP.Y_Train, Y_Prediction)
+EVS = explained_variance_score(DP.Y_Test, Y_Test_Prediction)
 print(f'Explained Variance Score: {EVS}')
 
 # Collecting results to save them in the text file
