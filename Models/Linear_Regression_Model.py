@@ -15,6 +15,8 @@ from sklearn import linear_model
 import matplotlib as plt
 import time
 import seaborn as sns 
+from joblib import Parallel, delayed 
+import joblib 
 
 Start_Time = time.time()
 
@@ -27,6 +29,9 @@ Model = linear_model.LinearRegression(fit_intercept=True, n_jobs = -1)
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train, DP.Y_Train)
+
+# Save the model as a pickle in a file 
+joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Trained_Model/LinearRegression.pkl') 
 
 #%%
 # # Make predictions on the train set
@@ -111,3 +116,5 @@ print(f"Results saved to {file_path}")
 End_Time = time.time()
 
 print(f"The process is completed and it took in total {End_Time-Start_Time} sec.")
+
+# %%

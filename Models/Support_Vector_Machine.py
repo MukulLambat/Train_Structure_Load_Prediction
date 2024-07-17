@@ -14,6 +14,8 @@ import sklearn
 from sklearn.svm import SVR
 import matplotlib as plt
 import time
+from joblib import Parallel, delayed 
+import joblib 
 
 Start_Time = time.time()
 print(f"Model training started.")
@@ -25,6 +27,9 @@ Model = SVR(kernel='rbf')
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train, DP.Y_Train)
+
+# Save the model as a pickle in a file 
+joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Trained_Model/Support_Vector_Regressor.pkl') 
 
 # Make predictions on the train set
 

@@ -14,6 +14,8 @@ import sklearn
 from sklearn.linear_model import SGDRegressor
 import matplotlib as plt
 import time
+from joblib import Parallel, delayed 
+import joblib 
 
 Start_Time = time.time()
 print(f"Model training started.")
@@ -21,9 +23,14 @@ print(f"Model training started.")
 
 # Initialize the SVM regression model
 Model = SGDRegressor(loss='squared_error')
+
+
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train, DP.Y_Train)
+
+# Save the model as a pickle in a file 
+joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Trained_Model/SGDRegressor.pkl') 
 
 # Make predictions on the train set
 

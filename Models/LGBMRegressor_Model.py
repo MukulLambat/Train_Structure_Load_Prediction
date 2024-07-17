@@ -5,7 +5,7 @@ sys.path.append('/Users/mukul/Desktop/DLR_Internship/Code/Process_Data')
 # Import Required Python Files
 import Data_PreProcessing as DP
 
-#%% Import the requied libraries
+#%% Import the required libraries
 import pandas as pd 
 import numpy as np  
 import sktime
@@ -14,6 +14,8 @@ import lightgbm
 from lightgbm import LGBMRegressor
 import matplotlib as plt
 import time
+from joblib import Parallel, delayed 
+import joblib 
 
 Start_Time = time.time()
 print(f"Model training started.")
@@ -30,6 +32,9 @@ Model = LGBMRegressor(boosting_type='gbdt',
 # Train the model on the transformed training data
 
 Model.fit(DP.X_Train, DP.Y_Train)
+
+# Save the model as a pickle in a file 
+joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Trained_Model/LGBMRegressor.pkl') 
 
 # Make predictions on the Train set
 
