@@ -4,11 +4,7 @@ import Actual_Data as AD
 #%% Import Required Libraries
 import pandas as pd 
 import numpy as np
-import sklearn
-import numba
 from sklearn.model_selection import train_test_split
-from sktime.transformations.panel.rocket import MiniRocketMultivariate
-from sklearn.preprocessing import MinMaxScaler
 import time
 from sklearn.preprocessing import StandardScaler
 from matplotlib import pyplot as plt

@@ -167,7 +167,7 @@ def model_loss(model, dataset, train = False, optimizer = None):
 
   return avg_loss/count, avg_score/count
 #%%# define the number of epochs
-epochs = 300
+epochs = 350
 
 # define the performance measure and optimizer
 # optimizer = SGD( model.parameters(), lr= 1e-5)
@@ -209,12 +209,9 @@ plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.title('Training Loss Over Epochs')
 plt.legend()
-plt.show()
+plt.savefig('/Users/mukul/Desktop/DLR_Internship/Code/Results/CNN_training_loss_plot.png')
+plt.clf()
 
-# plot the MSE graph
-plt.plot(range(epochs), mse_values, label='Training MSE')
-plt.xlabel('Epochs')
-plt.ylabel('MSE')
-plt.title('Training MSE Over Epochs')
-plt.legend()
-plt.show()
+
+#%% Save the trained model
+torch.save(model, "/Users/mukul/Desktop/DLR_Internship/Code/Trained_Model/CNN_Model.pth")
