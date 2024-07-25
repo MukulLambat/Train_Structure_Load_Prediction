@@ -1,0 +1,8 @@
+Results for model: CNN_Regressor
+========================================
+Mean Absolute Error: 0.2639148533344269
+Mean Absolute Percentage Error: 25.63929557800293
+Mean Squared Error: 0.4685085415840149
+Root Mean Squared Error: 0.6844768524169922
+R-squared: 0.5311228804956771
+Explained Variance Score: 0.5319023132324219

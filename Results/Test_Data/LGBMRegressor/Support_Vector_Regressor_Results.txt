@@ -1,0 +1,8 @@
+Results for model: LGBMRegressor
+========================================
+Mean Absolute Error: 0.7614138906053778
+Mean Absolute Percentage Error: 105.51887090528218
+Mean Squared Error: 0.9826481363701933
+Root Mean Squared Error: 0.9912861021774659
+R-squared: 0.017351863629806674
+Explained Variance Score: 0.017352545106593453

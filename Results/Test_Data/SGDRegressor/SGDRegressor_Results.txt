@@ -1,0 +1,8 @@
+Results for model: SGDRegressor_Results
+========================================
+Mean Absolute Error: 0.7846703544834774
+Mean Absolute Percentage Error: 110.48112529427654
+Mean Squared Error: 1.0450091143259588
+Root Mean Squared Error: 1.0222568729658699
+R-squared: -0.04500911432595878
+Explained Variance Score: -0.04495851884177937

@@ -5,3 +5,4 @@ Mean Absolute Percentage Error: 57.32191199242118
 Mean Squared Error: 0.608277903028512
 Root Mean Squared Error: 0.7799217287834158
 R-squared: 0.391338333025224
+Explained Variance Score: 0.4047281880841729

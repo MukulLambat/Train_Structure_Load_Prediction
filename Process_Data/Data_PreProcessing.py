@@ -9,6 +9,8 @@ import time
 from sklearn.preprocessing import StandardScaler
 from matplotlib import pyplot as plt
 import seaborn as sns
+import joblib
+
 Start_Time = time.time()
 
 # %%# Check for missing values
@@ -42,6 +44,8 @@ X_Train, X_Test, Y_Train, Y_Test = train_test_split(X_Train_Standardized, Y_Trai
                                    test_size= 0.2,
                                    stratify=None)
 
-# End_Time = time.time()
+End_Time = time.time()
 
-# print(f"Data Pre-Processing is done and is completed in {End_Time-Start_Time} sec.")
+print(f"Data Pre-Processing is done and is completed in {End_Time-Start_Time} sec.")
+
+# %%

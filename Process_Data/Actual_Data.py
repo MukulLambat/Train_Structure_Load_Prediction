@@ -101,10 +101,10 @@ for index, file in enumerate(Sorted_Acceleration_Files):
     Dataset.columns = list(Dataset.columns[:-1]) + ['Force_Applied']
 
     #Save the Dataset DataFrame to a CSV file
-    Dataset.to_csv(f'/Users/mukul/Desktop/DLR_Internship/Actual_Data/Combined_Data/Combined_{Split_File_Name[1]}_{Split_File_Name[2]}_{Split_File_Name[3]}.csv', index=False)
+    Dataset.to_csv(f'/Users/mukul/Desktop/DLR_Internship/Actual_Data/Raw_Data/Combined_{Split_File_Name[1]}_{Split_File_Name[2]}_{Split_File_Name[3]}.csv', index=False)
 
 # %% Now Concatnate each individual CSV to create the whole Dataset
-Path_Combine_Individual_Simulation_Result = ('/Users/mukul/Desktop/DLR_Internship/Actual_Data/Combined_Data')
+Path_Combine_Individual_Simulation_Result = ('/Users/mukul/Desktop/DLR_Internship/Actual_Data/Raw_Data')
 
 # Get the List of aceeleration files in a list using glob
 Individual_Simulation_Result = glob.glob(os.path.join(Path_Combine_Individual_Simulation_Result, 'Combined_Simu_*_accel.csv'))

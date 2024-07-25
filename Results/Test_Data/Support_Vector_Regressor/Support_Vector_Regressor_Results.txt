@@ -1,0 +1,9 @@
+Results for model: Support_Vector_Regressor_Results
+========================================
+Mean Absolute Error: 2.5442287449633363
+Mean Absolute Percentage Error: 449.20921568070327
+Mean Squared Error: 13.629261883227729
+Root Mean Squared Error: 3.6917830222302785
+R-squared: -12.629261883227729
+Explained Variance Score: -12.58509262215113
+==

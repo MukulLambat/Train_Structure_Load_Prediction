@@ -1,9 +1,17 @@
-#%% Add the directory containing Data_PreProcessing.py to the system path
+#%% Import Required Python Files
 import sys
 import os
-sys.path.append('/Users/mukul/Desktop/DLR_Internship/Code/Process_Data')
 
-# Import Required Python Files
+# Get the current file's directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to Process_Data
+process_data_path = os.path.join(current_dir, '../Process_Data')
+
+# Add Process_Data to the system path
+sys.path.insert(0, process_data_path)
+
+# Now you can import Data_PreProcessing
 import Data_PreProcessing as DP
 
 #%% Import the required libraries
@@ -12,7 +20,7 @@ import numpy as np
 import sktime
 import sklearn
 from sklearn.svm import SVR
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import time
 from joblib import Parallel, delayed 
 import joblib 
@@ -46,7 +54,6 @@ print(f"Model training is done.\n It took {Current_Time-Start_Time} to train the
 # Importing the required evaluation metric from Sklearn
 from sklearn.metrics import (mean_absolute_error, 
                             mean_squared_error, 
-                            mean_squared_log_error, 
                             r2_score, 
                             explained_variance_score)
 
@@ -71,10 +78,6 @@ print(f'Mean Squared Error: {MSE}')
 RMSE = mean_squared_error(DP.Y_Test, Y_Test_Prediction, squared=False)
 print(f'Root Mean Squared Error: {RMSE}')
 
-# # Mean Squared Log Error
-# MLSE = mean_squared_log_error(DP.Y_Test, Y_Test_Prediction)
-# print(f'Mean Squared Logarithmic Error: {MLSE}')
-
 # R-squared Error
 r2 = r2_score(DP.Y_Test, Y_Test_Prediction)
 print(f'R-squared: {r2}')
@@ -89,7 +92,6 @@ results = {
     'Mean Absolute Percentage Error': MAPE,
     'Mean Squared Error': MSE,
     'Root Mean Squared Error': RMSE,
-    #'Mean Squared Logarithmic Error': MLSE,
     'R-squared': r2,
     'Explained Variance Score': EVS
 }
@@ -98,7 +100,7 @@ results = {
 model_name = 'Support_Vector_Machine'
 
 # File path where you want to save the results
-file_path = f'/Users/mukul/Desktop/DLR_Internship/Results/{model_name}.txt'
+file_path = f'/Users/mukul/Desktop/DLR_Internship/Code/Results/Validation_Results/Support_Vector_Regressor/{model_name}.txt'
 
 # Writing the results to the text file
 with open(file_path, 'w') as file:
@@ -108,6 +110,25 @@ with open(file_path, 'w') as file:
         file.write(f"{key}: {value}\n")
 
 print(f"Results saved to {file_path}")
+
+#%% Plotting the scatter plot between actual values and predicted values
+#Inverse transform the predicted values and actual values to the original scale
+
+Actual_Values_In_Original_Scale = DP.std.inverse_transform(DP.Y_Test.reshape(-1, 1)).flatten()
+
+Predicted_Values_In_Original_Scale = DP.std.inverse_transform(Y_Test_Prediction.reshape(-1, 1)).flatten()
+
+# for 200 values in test data
+plt.figure(figsize=(10, 6))
+plt.scatter(range(1600),Actual_Values_In_Original_Scale[:1600,], label='Actual Force Applied', marker='o', s=100, c='c', edgecolors='k',linewidths=0.6)
+plt.scatter(range(1600),Predicted_Values_In_Original_Scale[:1600,], label='Force Predicted', marker='*', s=100, c='m', edgecolors='k',linewidths=0.6)
+plt.xlabel('Number of Samples')
+plt.ylabel('Force')
+plt.title('Actual vs Predicted Values of Force Applied')
+plt.legend()
+plt.savefig('/Users/mukul/Desktop/DLR_Internship/Code/Results/Validation_Results/Support_Vector_Regressor/Support_Vector_Regressor.png')
+#plt.show()
+
 
 End_Time = time.time()
 

@@ -1,9 +1,17 @@
-#%% Add the directory containing Data_PreProcessing.py to the system path
+# Import Required Python Files
 import sys
 import os
-sys.path.append('/Users/mukul/Desktop/DLR_Internship/Code/Process_Data')
 
-# Import Required Python Files
+# Get the current file's directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to Process_Data
+process_data_path = os.path.join(current_dir, '../Process_Data')
+
+# Add Process_Data to the system path
+sys.path.insert(0, process_data_path)
+
+# Now you can import Data_PreProcessing
 import Data_PreProcessing as DP
 
 #%% Import the requied libraries
@@ -12,7 +20,7 @@ import numpy as np
 import sktime
 import sklearn
 from sklearn import linear_model
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import time
 import seaborn as sns 
 from joblib import Parallel, delayed 
@@ -31,7 +39,7 @@ Model = linear_model.LinearRegression(fit_intercept=True, n_jobs = -1)
 Model.fit(DP.X_Train, DP.Y_Train)
 
 # Save the model as a pickle in a file 
-joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Trained_Model/LinearRegression.pkl') 
+joblib.dump(Model, '/Users/mukul/Desktop/DLR_Internship/Code/Trained_Model/Linear_Regression.pkl') 
 
 #%%
 # # Make predictions on the train set
@@ -51,7 +59,6 @@ print(f" Model training is done.\n It took {Current_Time-Start_Time} to train th
 # Importing the required Metrics from Sklearn
 from sklearn.metrics import (mean_absolute_error, 
                             mean_squared_error, 
-                            mean_squared_log_error, 
                             r2_score, 
                             explained_variance_score)
 
@@ -75,10 +82,6 @@ print(f'Mean Squared Error: {MSE}')
 RMSE = mean_squared_error(DP.Y_Test, Y_Test_Prediction, squared=False)
 print(f'Root Mean Squared Error: {RMSE}')
 
-# # Mean Squared Log Error
-# MLSE = mean_squared_log_error(DP.Y_Test, Y_Test_Prediction)
-# print(f'Mean Squared Logarithmic Error: {MLSE}')
-
 # R-squared Error
 r2 = r2_score(DP.Y_Test, Y_Test_Prediction)
 print(f'R-squared: {r2}')
@@ -93,16 +96,15 @@ results = {
     'Mean Absolute Percentage Error': MAPE,
     'Mean Squared Error': MSE,
     'Root Mean Squared Error': RMSE,
-    #'Mean Squared Logarithmic Error': MLSE,
     'R-squared': r2,
     'Explained Variance Score': EVS
 }
 
 # Get model name
-model_name = 'Linear_Regression_Model_Results'
+model_name = 'Linear_Regression_Results'
 
 # File path where you want to save the results
-file_path = f'/Users/mukul/Desktop/DLR_Internship/Results/{model_name}.txt'
+file_path = f'/Users/mukul/Desktop/DLR_Internship/Code/Results/Validation_Results/Linear_Regression/{model_name}.txt'
 
 # Writing the results to the text file
 with open(file_path, 'w') as file:
@@ -112,6 +114,24 @@ with open(file_path, 'w') as file:
         file.write(f"{key}: {value}\n")
 
 print(f"Results saved to {file_path}")
+
+#%% Plotting the scatter plot between actual values and predicted values
+#Inverse transform the predicted values and actual values to the original scale
+
+Actual_Values_In_Original_Scale = DP.std.inverse_transform(DP.Y_Test.reshape(-1, 1)).flatten()
+
+Predicted_Values_In_Original_Scale = DP.std.inverse_transform(Y_Test_Prediction.reshape(-1, 1)).flatten()
+
+# for 200 values in test data
+plt.figure(figsize=(10, 6))
+plt.scatter(range(1600),Actual_Values_In_Original_Scale[:1600,], label='Actual Force Applied', marker='o', s=100, c='c', edgecolors='k',linewidths=0.6)
+plt.scatter(range(1600),Predicted_Values_In_Original_Scale[:1600,], label='Force Predicted', marker='*', s=100, c='m', edgecolors='k',linewidths=0.6)
+plt.xlabel('Number of Samples')
+plt.ylabel('Force')
+plt.title('Actual vs Predicted Values of Force Applied')
+plt.legend()
+plt.savefig('/Users/mukul/Desktop/DLR_Internship/Code/Results/Validation_Results/Linear_Regression/Linear_Regression.png')
+#plt.show()
 
 End_Time = time.time()
 
