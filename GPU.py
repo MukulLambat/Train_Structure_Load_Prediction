@@ -1,5 +1,6 @@
 import torch
 
+
 # Check for GPU availability
 use_cuda = torch.cuda.is_available()
 

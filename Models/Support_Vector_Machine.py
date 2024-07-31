@@ -133,3 +133,4 @@ plt.savefig('/Users/mukul/Desktop/DLR_Internship/Code/Results/Validation_Results
 End_Time = time.time()
 
 print(f"The process is completed and it took in total {End_Time-Start_Time} sec.")
+
